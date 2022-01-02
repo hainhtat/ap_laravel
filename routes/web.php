@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +14,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::resource('posts', HomeController::class);
+Route::resource('posts', HomeController::class)->middleware(['auth:sanctum', 'verified']);
+
+Route::get('logout', [AuthController::class, 'logout']);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/posts', [HomeController::class, 'index']);

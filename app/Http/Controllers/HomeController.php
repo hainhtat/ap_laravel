@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 
@@ -27,7 +28,8 @@ class HomeController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $categories = Category::all();
+        return view('create', compact('categories'));
     }
 
     /**
@@ -38,16 +40,13 @@ class HomeController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        // $validated = $request->validated();
+        $validated = $request->validated();
         // $post = new Post();
         // $post->name = $request->name;
         // $post->description = $request->description;
 
         // $post->save();
-        Post::create([
-            'name' => $request->name,
-            'description' => $request->description,
-        ]);
+        Post::create($validated);
         return redirect('/posts');
     }
 
@@ -70,7 +69,8 @@ class HomeController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('edit', compact('post'));
+        $categories = Category::all();
+        return view('edit', compact('post', 'categories'));
     }
 
     /**
@@ -90,6 +90,7 @@ class HomeController extends Controller
         $post->update([
             'name' => $request->name,
             'description' => $request->description,
+            'category_id' => $request->category_id,
         ]);
         return redirect('/posts');
     }

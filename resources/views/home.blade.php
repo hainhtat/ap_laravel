@@ -4,6 +4,7 @@
   <div class="container">
     <div class="">
       <a href="/posts/create" class="btn btn-success">Add new post</a>
+      <a href="logout" class="btn btn-danger">LogOut</a>
     </div>
     <br>
     <div class="card">
