@@ -2,10 +2,14 @@
 
 @section('content')
   <div class="container">
-    <div class="">
+    <div>
       <a href="/posts/create" class="btn btn-success">Add new post</a>
       <a href="logout" class="btn btn-danger">LogOut</a>
+
+      <h4 style="float:right">{{Auth::user()->name}}</h4>
     </div>
+
+    
     <br>
     <div class="card">
       <div class="card-header" style="text-align:center">
